@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAIROS — Sistema de Manutenção Industrial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="sidebar">
+    <div class="brand"><img class="logo" src="https://f2.toyhou.se/file/f2-toyhou-se/images/128574618_wfxLARJpkYLdZN0.png" alt="KAIROS"></div>
+    <div class="brand-sub">KAIROS — Sistema de Manutenção Industrial</div>
+    <button class="nav-item active" data-view="painel" onclick="showView('painel', this)"><span class="nav-key">D</span> Dashboard</button>
+    <button class="nav-item" data-view="equipamentos" onclick="showView('equipamentos', this)"><span class="nav-key">E</span> Equipamentos</button>
+    <button class="nav-item" data-view="ordens" onclick="showView('ordens', this)"><span class="nav-key">O</span> Ordens de Serviço</button>
+    <button class="nav-item" data-view="preventiva" onclick="showView('preventiva', this)"><span class="nav-key">P</span> Manutenção Preventiva</button>
+    <button class="nav-item" data-view="tecnicos" onclick="showView('tecnicos', this)"><span class="nav-key">T</span> Técnicos</button>
+    <button class="nav-item" data-view="setores" onclick="showView('setores', this)"><span class="nav-key">S</span> Setores</button>
+    <button class="nav-item" data-view="relatorios" onclick="showView('relatorios', this)"><span class="nav-key">R</span> Relatórios</button>
+    <div class="sidebar-div"></div>
+    <div class="sidebar-foot">Clique em cada item do menu para navegar até a seção correspondente</div>
+  </div>
+
+  <div class="content">
+
+    <!-- ============ PAINEL DO DIA ============ -->
+    <div id="painel" class="view active">
+      <h1>Bom dia, Oscar</h1>
+      <p class="sub">Segunda-feira, 30 de março — veja o que precisa da sua atenção hoje</p>
+
+      <div class="status-card">
+        <div class="status-headline">Das <b>14 máquinas</b> da fábrica, <b>12 estão funcionando normalmente</b> agora.</div>
+        <div class="status-bar">
+          <div class="seg-green" style="width:85.7%"></div>
+          <div class="seg-orange" style="width:7.15%"></div>
+          <div class="seg-red" style="width:7.15%"></div>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span><b>12</b>&nbsp;operando normalmente</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--orange)"></span><b>1</b>&nbsp;em manutenção</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span><b>1</b>&nbsp;parada</div>
+        </div>
+      </div>
+
+      <div class="section-title">Precisa da sua atenção agora</div>
+      <div class="attn-card">
+        <div class="attn-icon">🔴</div>
+        <div style="flex:1;"><div class="attn-title">Compressor CP-10 parou de funcionar</div><div class="attn-sub">Setor Expedição · precisa de reparo urgente</div></div>
+        <button class="btn-primary" onclick="showView('ordens', document.querySelector('[data-view=ordens]'))">Ver ordem de serviço</button>
+      </div>
+      <div class="attn-card warn">
+        <div class="attn-icon">🟡</div>
+        <div style="flex:1;"><div class="attn-title">Furadeira FI-30 precisa de revisão em breve</div><div class="attn-sub">Setor Montagem · revisão prevista para daqui a 2 dias</div></div>
+        <button class="btn-ghost" onclick="showView('preventiva', document.querySelector('[data-view=preventiva]'))">Agendar revisão</button>
+      </div>
+
+      <div class="cols" style="margin-top:24px;">
+        <div>
+          <div class="section-title" style="font-size:14px;">Ordens de serviço em aberto (3)</div>
+          <div class="list-card">
+            <div class="list-row"><span class="tag red">Corretiva</span><div class="row-main"><div class="row-title">Compressor CP-10</div><div class="row-sub">Carlos Souza</div></div><div class="row-date">Em andamento</div></div>
+            <div class="list-row"><span class="tag green">Preventiva</span><div class="row-main"><div class="row-title">Furadeira FI-30</div><div class="row-sub">Fernanda Lima</div></div><div class="row-date">Aberta hoje</div></div>
+            <div class="list-row"><span class="tag green">Preventiva</span><div class="row-main"><div class="row-title">Prensa PH-200</div><div class="row-sub">Carlos Souza</div></div><div class="row-date">25/03</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="section-title" style="font-size:14px;">Próximas manutenções</div>
+          <div class="list-card">
+            <div class="list-row"><div class="row-main"><div class="row-title">Furadeira FI-30</div><div class="row-sub">Revisão de rotina</div></div><div class="row-date">01/04</div></div>
+            <div class="list-row"><div class="row-main"><div class="row-title">Torno CNC TL-500</div><div class="row-sub">Revisão de rotina</div></div><div class="row-date">03/04</div></div>
+            <div class="list-row"><div class="row-main"><div class="row-title">Prensa PH-200</div><div class="row-sub">Revisão de rotina</div></div><div class="row-date">10/04</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="help-strip"><span>💡</span><div><b>O que é manutenção preventiva?</b>É a revisão feita antes de a máquina quebrar, seguindo uma data programada — evita paradas surpresa e reparos mais caros.</div></div>
+    </div>
+
+    <!-- ============ EQUIPAMENTOS ============ -->
+    <div id="equipamentos" class="view">
+      <h1>Equipamentos</h1>
+      <p class="sub">Veja rapidamente o estado de cada máquina da fábrica</p>
+
+      <div class="status-card">
+        <div class="status-headline"><b>12</b> operando · <b>1</b> em manutenção · <b>1</b> parada — de 14 máquinas no total</div>
+        <div class="status-bar">
+          <div class="seg-green" style="width:85.7%"></div><div class="seg-orange" style="width:7.15%"></div><div class="seg-red" style="width:7.15%"></div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input class="search" type="text" placeholder="Buscar máquina pelo nome...">
+        <button class="chip active">Todas</button>
+        <button class="chip">Operando</button>
+        <button class="chip">Em manutenção</button>
+        <button class="chip">Paradas</button>
+      </div>
+
+      <div class="card-grid">
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Prensa Hidráulica PH-200</div><div class="item-loc">Linha de Prensa</div></div><span class="tag green">Operando</span></div>
+          <div class="item-facts"><div class="fact">Fabricante<b>Schuler</b></div><div class="fact">Próxima revisão<b>10/04</b></div></div>
+          <button class="btn-ghost">Ver detalhes</button>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Torno CNC TL-500</div><div class="item-loc">Montagem Final</div></div><span class="tag green">Operando</span></div>
+          <div class="item-facts"><div class="fact">Fabricante<b>Romi</b></div><div class="fact">Próxima revisão<b>03/04</b></div></div>
+          <button class="btn-ghost">Ver detalhes</button>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Compressor CP-10</div><div class="item-loc">Expedição</div></div><span class="tag orange">Em manutenção</span></div>
+          <div class="item-facts"><div class="fact">Fabricante<b>Schulz</b></div><div class="fact">Situação<b>Reparo em andamento</b></div></div>
+          <button class="btn-primary">Ver ordem de serviço</button>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Furadeira FI-30</div><div class="item-loc">Montagem Final</div></div><span class="tag green">Operando</span></div>
+          <div class="item-facts"><div class="fact">Fabricante<b>Invicta</b></div><div class="fact">Próxima revisão<b>01/04</b></div></div>
+          <button class="btn-ghost">Ver detalhes</button>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Serra Circular SC-50</div><div class="item-loc">Corte</div></div><span class="tag green">Operando</span></div>
+          <div class="item-facts"><div class="fact">Fabricante<b>Makita</b></div><div class="fact">Próxima revisão<b>15/04</b></div></div>
+          <button class="btn-ghost">Ver detalhes</button>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Injetora de Plástico IP-12</div><div class="item-loc">Injeção</div></div><span class="tag red">Parada</span></div>
+          <div class="item-facts"><div class="fact">Fabricante<b>Romi</b></div><div class="fact">Situação<b>Aguardando peça</b></div></div>
+          <button class="btn-primary">Abrir ordem de serviço</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ORDENS DE SERVIÇO ============ -->
+    <div id="ordens" class="view">
+      <h1>Ordens de Serviço</h1>
+      <p class="sub">Abra e acompanhe os reparos e revisões das máquinas</p>
+
+      <div class="form-card">
+        <div class="section-title" style="margin-bottom:18px;">Abrir nova ordem de serviço</div>
+
+        <div class="form-group">
+          <p class="form-q">Qual máquina precisa de atenção?</p>
+          <select><option>Selecionar máquina...</option><option>Compressor CP-10</option><option>Furadeira FI-30</option><option>Prensa Hidráulica PH-200</option></select>
+        </div>
+
+        <div class="form-group">
+          <p class="form-q">O que está acontecendo?</p>
+          <div class="choice-row">
+            <button class="choice-btn sel-red">🔧 A máquina quebrou (corretiva)</button>
+            <button class="choice-btn">📅 Revisão programada (preventiva)</button>
+            <button class="choice-btn">📡 Alerta do sistema (preditiva)</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p class="form-q">Qual a urgência?</p>
+          <div class="choice-row">
+            <button class="choice-btn sel-green">Normal</button>
+            <button class="choice-btn sel-orange">Alta</button>
+            <button class="choice-btn sel-red">Urgente</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p class="form-q">Descreva o problema em poucas palavras</p>
+          <textarea placeholder="Ex: máquina fazendo barulho estranho e parou de ligar"></textarea>
+        </div>
+
+        <button class="btn-primary" style="padding:13px 22px; font-size:14px;">Abrir ordem de serviço</button>
+      </div>
+
+      <div class="section-title">Ordens abertas (3)</div>
+      <div class="list-card">
+        <div class="list-row"><span class="tag red">Corretiva</span><div class="row-main"><div class="row-title">Compressor CP-10 · Expedição</div><div class="row-sub">Responsável: Carlos Souza</div></div><div class="row-date">Em andamento</div></div>
+        <div class="list-row"><span class="tag green">Preventiva</span><div class="row-main"><div class="row-title">Furadeira FI-30 · Montagem</div><div class="row-sub">Responsável: Fernanda Lima</div></div><div class="row-date">Aberta hoje</div></div>
+        <div class="list-row"><span class="tag green">Preventiva</span><div class="row-main"><div class="row-title">Prensa PH-200 · Linha Prensa</div><div class="row-sub">Responsável: Carlos Souza</div></div><div class="row-date">25/03</div></div>
+      </div>
+
+      <div class="help-strip"><span>💡</span><div><b>Corretiva x Preventiva</b>Corretiva é quando a máquina já quebrou. Preventiva é a revisão programada antes de quebrar.</div></div>
+    </div>
+
+    <!-- ============ MANUTENÇÃO PREVENTIVA ============ -->
+    <div id="preventiva" class="view">
+      <h1>Manutenção Preventiva</h1>
+      <p class="sub">Revisões programadas para evitar que as máquinas quebrem</p>
+
+      <div class="status-card">
+        <div class="status-headline">Este mês há <b>8 revisões programadas</b>, e <b>1 está atrasada</b> e precisa de atenção.</div>
+        <div class="status-bar">
+          <div class="seg-green" style="width:62.5%"></div><div class="seg-orange" style="width:25%"></div><div class="seg-red" style="width:12.5%"></div>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span><b>5</b>&nbsp;concluídas</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--orange)"></span><b>2</b>&nbsp;programadas</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span><b>1</b>&nbsp;atrasada</div>
+        </div>
+      </div>
+
+      <div class="section-title">Próximas revisões</div>
+      <div class="list-card">
+        <div class="list-row"><span class="tag red">Atrasada</span><div class="row-main"><div class="row-title">Compressor CP-10</div><div class="row-sub">Revisão mensal</div></div><button class="btn-primary">Agendar agora</button></div>
+        <div class="list-row"><span class="tag orange">Próxima</span><div class="row-main"><div class="row-title">Furadeira FI-30</div><div class="row-sub">Revisão a cada 2 meses</div></div><div class="row-date">01/04</div></div>
+        <div class="list-row"><span class="tag orange">Próxima</span><div class="row-main"><div class="row-title">Torno CNC TL-500</div><div class="row-sub">Revisão quinzenal</div></div><div class="row-date">03/04</div></div>
+        <div class="list-row"><span class="tag green">Em dia</span><div class="row-main"><div class="row-title">Prensa PH-200</div><div class="row-sub">Revisão mensal</div></div><div class="row-date">10/04</div></div>
+        <div class="list-row"><span class="tag green">Em dia</span><div class="row-main"><div class="row-title">Serra Circular SC-50</div><div class="row-sub">Revisão mensal</div></div><div class="row-date">01/04</div></div>
+        <div class="list-row"><span class="tag green">Em dia</span><div class="row-main"><div class="row-title">Injetora IP-12</div><div class="row-sub">Revisão trimestral</div></div><div class="row-date">01/04</div></div>
+      </div>
+
+      <div class="help-strip"><span>💡</span><div><b>Por que a data importa</b>Cada máquina tem uma frequência de revisão diferente — algumas precisam de revisão toda semana, outras só a cada 3 meses.</div></div>
+    </div>
+
+    <!-- ============ TÉCNICOS ============ -->
+    <div id="tecnicos" class="view">
+      <h1>Técnicos</h1>
+      <p class="sub">Equipe responsável pela manutenção das máquinas</p>
+
+      <div class="status-card">
+        <div class="status-headline">Sua equipe tem <b>3 técnicos ativos</b> e concluiu <b>25 ordens de serviço</b> este mês.</div>
+      </div>
+
+      <div class="card-grid">
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Carlos Souza</div><div class="item-loc">Mecânico Sênior · Mecânica Industrial</div></div><span class="tag green">Ativo</span></div>
+          <div class="item-facts"><div class="fact">Telefone<b>(11) 98000-0001</b></div><div class="fact">Ordens realizadas<b>12</b></div></div>
+          <button class="btn-ghost">Ver histórico</button>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Fernanda Lima</div><div class="item-loc">Eletricista · Elétrica / Automação</div></div><span class="tag green">Ativo</span></div>
+          <div class="item-facts"><div class="fact">Telefone<b>(11) 98000-0002</b></div><div class="fact">Ordens realizadas<b>8</b></div></div>
+          <button class="btn-ghost">Ver histórico</button>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Roberto Dias</div><div class="item-loc">Auxiliar de Manutenção · Geral</div></div><span class="tag orange">Em férias</span></div>
+          <div class="item-facts"><div class="fact">Telefone<b>(11) 98000-0003</b></div><div class="fact">Ordens realizadas<b>5</b></div></div>
+          <button class="btn-ghost">Ver histórico</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SETORES ============ -->
+    <div id="setores" class="view">
+      <h1>Setores</h1>
+      <p class="sub">Áreas da fábrica e as máquinas de cada uma</p>
+
+      <div class="status-card">
+        <div class="status-headline">A fábrica tem <b>6 setores</b> e <b>14 máquinas</b> ao todo, distribuídas em 3 galpões.</div>
+      </div>
+
+      <div class="card-grid">
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Linha de Prensa</div><div class="item-loc">Galpão 1 · Responsável: Carlos Souza</div></div></div>
+          <div class="item-facts"><div class="fact">Máquinas<b>4</b></div><div class="fact">Situação<b style="color:var(--green)">Todas operando</b></div></div>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Montagem Final</div><div class="item-loc">Galpão 2 · Responsável: Fernanda Lima</div></div></div>
+          <div class="item-facts"><div class="fact">Máquinas<b>6</b></div><div class="fact">Situação<b style="color:var(--orange)">1 em manutenção</b></div></div>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Expedição</div><div class="item-loc">Galpão 3 · Responsável: Roberto Dias</div></div></div>
+          <div class="item-facts"><div class="fact">Máquinas<b>2</b></div><div class="fact">Situação<b style="color:var(--orange)">1 em manutenção</b></div></div>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Corte</div><div class="item-loc">Galpão 1 · Responsável: Carlos Souza</div></div></div>
+          <div class="item-facts"><div class="fact">Máquinas<b>1</b></div><div class="fact">Situação<b style="color:var(--green)">Operando</b></div></div>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Injeção</div><div class="item-loc">Galpão 2 · Responsável: Fernanda Lima</div></div></div>
+          <div class="item-facts"><div class="fact">Máquinas<b>1</b></div><div class="fact">Situação<b style="color:var(--red)">Parada</b></div></div>
+        </div>
+        <div class="item-card">
+          <div class="item-top"><div><div class="item-name">Almoxarifado</div><div class="item-loc">Galpão 3 · Responsável: Roberto Dias</div></div></div>
+          <div class="item-facts"><div class="fact">Máquinas<b>0</b></div><div class="fact">Situação<b>Sem máquinas</b></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ RELATÓRIOS ============ -->
+    <div id="relatorios" class="view">
+      <h1>Relatórios</h1>
+      <p class="sub">Como está o desempenho da manutenção este mês</p>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-num">18 dias</div>
+          <div class="metric-label">Tempo até quebrar de novo</div>
+          <div class="metric-explain">Em média, cada máquina passa 18 dias funcionando bem antes de precisar de outro reparo.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">4 horas</div>
+          <div class="metric-label">Tempo médio de conserto</div>
+          <div class="metric-explain">É o tempo que os técnicos levam, em média, para resolver um problema.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">94%</div>
+          <div class="metric-label">Máquinas funcionando</div>
+          <div class="metric-explain">Na maior parte do tempo este mês, 94% das máquinas estavam operando normalmente.</div>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-headline">Das <b>29 ordens de serviço</b> deste mês, a maioria foi <b>preventiva</b> — ou seja, revisão programada, não quebra.</div>
+        <div class="status-bar">
+          <div class="seg-green" style="width:62%"></div><div class="seg-red" style="width:28%"></div><div class="seg-blue" style="width:10%"></div>
+        </div>
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span><b>18</b>&nbsp;preventivas</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span><b>8</b>&nbsp;corretivas (quebras)</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span><b>3</b>&nbsp;preditivas (alertas)</div>
+        </div>
+      </div>
+
+      <div class="section-title">Custo por máquina este mês</div>
+      <div class="list-card">
+        <div class="list-row"><div class="row-main"><div class="row-title">Compressor CP-10</div><div class="row-sub">3 ordens · principalmente corretiva</div></div><div class="row-date">R$ 1.200</div></div>
+        <div class="list-row"><div class="row-main"><div class="row-title">Prensa Hidráulica PH-200</div><div class="row-sub">1 ordem · preventiva</div></div><div class="row-date">R$ 650</div></div>
+        <div class="list-row"><div class="row-main"><div class="row-title">Torno CNC TL-500</div><div class="row-sub">1 ordem · preventiva</div></div><div class="row-date">R$ 480</div></div>
+        <div class="list-row"><div class="row-main"><div class="row-title">Furadeira FI-30</div><div class="row-sub">2 ordens · corretiva</div></div><div class="row-date">R$ 310</div></div>
+        <div class="list-row"><div class="row-main"><div class="row-title">Serra Circular SC-50</div><div class="row-sub">1 ordem · preventiva</div></div><div class="row-date">R$ 200</div></div>
+      </div>
+
+      <div class="help-strip"><span>💡</span><div><b>Por que isso importa</b>Quanto mais manutenção preventiva (revisão programada) e menos corretiva (quebra), menor tende a ser o custo total — porque evita paradas inesperadas.</div></div>
+    </div>
+
+  </div>
+</div>
+<script src="javascript/script.js"></script>
+</body>
+</html>
