@@ -2,34 +2,42 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>KAIROS — Sistema de Manutenção Industrial</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="app">
 
-  <div class="sidebar">
-    <div class="brand"><img class="logo" src="https://f2.toyhou.se/file/f2-toyhou-se/images/128574618_wfxLARJpkYLdZN0.png" alt="KAIROS"></div>
+  <div class="sidebar" id="sidebar">
+    <div class="brand"><img class="logo" src="assets/kairos-logo-white.png" alt="KAIROS"></div>
     <div class="brand-sub">KAIROS — Sistema de Manutenção Industrial</div>
-    <button class="nav-item active" data-view="painel" onclick="showView('painel', this)"><span class="nav-key">D</span> Dashboard</button>
-    <button class="nav-item" data-view="equipamentos" onclick="showView('equipamentos', this)"><span class="nav-key">E</span> Equipamentos</button>
-    <button class="nav-item" data-view="ordens" onclick="showView('ordens', this)"><span class="nav-key">O</span> Ordens de Serviço</button>
-    <button class="nav-item" data-view="preventiva" onclick="showView('preventiva', this)"><span class="nav-key">P</span> Manutenção Preventiva</button>
-    <button class="nav-item" data-view="tecnicos" onclick="showView('tecnicos', this)"><span class="nav-key">T</span> Técnicos</button>
-    <button class="nav-item" data-view="setores" onclick="showView('setores', this)"><span class="nav-key">S</span> Setores</button>
-    <button class="nav-item" data-view="relatorios" onclick="showView('relatorios', this)"><span class="nav-key">R</span> Relatórios</button>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar modo de cor"><span class="theme-icon"><img id="themeIconImg" src="assets/icon-lua.png" alt="" aria-hidden="true"></span><span class="theme-label">Modo escuro</span></button>
+    <button class="nav-item active" data-view="painel" onclick="showView('painel', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/04_relatorios.png" alt="" aria-hidden="true"></span> Dashboard</button>
+    <button class="nav-item" data-view="equipamentos" onclick="showView('equipamentos', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/01_equipamentos.png" alt="" aria-hidden="true"></span> Equipamentos</button>
+    <button class="nav-item" data-view="ordens" onclick="showView('ordens', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/02_ordem_de_servico.png" alt="" aria-hidden="true"></span> Ordens de Serviço</button>
+    <button class="nav-item" data-view="preventiva" onclick="showView('preventiva', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/03_manutencao.png" alt="" aria-hidden="true"></span> Manutenção Preventiva</button>
+    <button class="nav-item" data-view="tecnicos" onclick="showView('tecnicos', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/06_usuarios.png" alt="" aria-hidden="true"></span> Técnicos</button>
+    <button class="nav-item" data-view="setores" onclick="showView('setores', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/01_equipamentos.png" alt="" aria-hidden="true"></span> Setores</button>
+    <button class="nav-item" data-view="relatorios" onclick="showView('relatorios', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/04_relatorios.png" alt="" aria-hidden="true"></span> Relatórios</button>
     <div class="sidebar-div"></div>
+    <div class="nav-label">Sistema</div>
+    <button class="nav-item" data-view="configuracoes" onclick="showView('configuracoes', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/07_configuracoes.png" alt="" aria-hidden="true"></span> Configurações</button>
+    <button class="nav-item" data-view="usuario" onclick="showView('usuario', this)"><span class="nav-key nav-icon-wrap"><img class="nav-icon" src="assets/06_usuarios.png" alt="" aria-hidden="true"></span> Área do Usuário</button>
     <div class="sidebar-foot">Clique em cada item do menu para navegar até a seção correspondente</div>
+    <button class="profile-btn" data-view="usuario" onclick="showView('usuario', this)" aria-label="Abrir área do usuário">
+      <span class="avatar js-initials">OR</span>
+      <span><span class="profile-name js-name" style="display:block;">Oscar Ribeiro</span><span class="profile-role">Gerente de Manutenção</span></span>
+    </button>
   </div>
 
   <div class="content">
 
     <!-- ============ PAINEL DO DIA ============ -->
     <div id="painel" class="view active">
-      <h1>Bom dia, Oscar</h1>
+      <h1>Bom dia, <span class="js-first">Oscar</span></h1>
       <p class="sub">Segunda-feira, 30 de março — veja o que precisa da sua atenção hoje</p>
 
       <div class="status-card">
@@ -48,12 +56,12 @@
 
       <div class="section-title">Precisa da sua atenção agora</div>
       <div class="attn-card">
-        <div class="attn-icon">🔴</div>
+        <div class="attn-icon"><img src="assets/08_notificacoes.png" alt="" aria-hidden="true"></div>
         <div style="flex:1;"><div class="attn-title">Compressor CP-10 parou de funcionar</div><div class="attn-sub">Setor Expedição · precisa de reparo urgente</div></div>
         <button class="btn-primary" onclick="showView('ordens', document.querySelector('[data-view=ordens]'))">Ver ordem de serviço</button>
       </div>
       <div class="attn-card warn">
-        <div class="attn-icon">🟡</div>
+        <div class="attn-icon"><img src="assets/03_manutencao.png" alt="" aria-hidden="true"></div>
         <div style="flex:1;"><div class="attn-title">Furadeira FI-30 precisa de revisão em breve</div><div class="attn-sub">Setor Montagem · revisão prevista para daqui a 2 dias</div></div>
         <button class="btn-ghost" onclick="showView('preventiva', document.querySelector('[data-view=preventiva]'))">Agendar revisão</button>
       </div>
@@ -323,6 +331,129 @@
       </div>
 
       <div class="help-strip"><span>💡</span><div><b>Por que isso importa</b>Quanto mais manutenção preventiva (revisão programada) e menos corretiva (quebra), menor tende a ser o custo total — porque evita paradas inesperadas.</div></div>
+    </div>
+
+
+    <div id="configuracoes" class="view">
+      <h1>Configurações</h1>
+      <p class="sub">Ajuste o sistema do jeito que funciona melhor para você</p>
+
+      <div class="status-card">
+        <div class="status-headline">Você recebe <b id="alertas-qtd">3 de 4 alertas</b> do sistema.</div>
+        <div class="status-bar"><div class="seg-green" id="alertas-barra" style="width:75%"></div></div>
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>alertas ligados</div>
+        </div>
+      </div>
+
+      <div class="section-title">Alertas</div>
+      <div class="list-card" style="margin-bottom:22px;">
+        <label class="list-row"><div class="row-main"><div class="row-title">Máquina parada</div><div class="row-sub">Avisar na hora em que uma máquina parar de funcionar</div></div><span class="switch"><input type="checkbox" data-setting="alerta-parada" checked><span class="track"></span></span></label>
+        <label class="list-row"><div class="row-main"><div class="row-title">Revisão chegando</div><div class="row-sub">Avisar antes de uma manutenção preventiva</div></div><span class="switch"><input type="checkbox" data-setting="alerta-revisao" checked><span class="track"></span></span></label>
+        <label class="list-row"><div class="row-main"><div class="row-title">Ordem de serviço concluída</div><div class="row-sub">Avisar quando um técnico terminar um reparo</div></div><span class="switch"><input type="checkbox" data-setting="alerta-concluida" checked><span class="track"></span></span></label>
+        <label class="list-row"><div class="row-main"><div class="row-title">Resumo diário por e-mail</div><div class="row-sub">Receber todo dia um resumo da situação da fábrica</div></div><span class="switch"><input type="checkbox" data-setting="alerta-resumo"><span class="track"></span></span></label>
+      </div>
+
+      <div class="form-card">
+        <div class="section-title" style="margin-bottom:18px;">Preferências gerais</div>
+
+        <div class="form-group">
+          <p class="form-q">Com quanto tempo de antecedência avisar sobre as revisões?</p>
+          <div class="choice-row" data-setting="antecedencia">
+            <button type="button" class="choice-btn" data-value="1">1 dia antes</button>
+            <button type="button" class="choice-btn sel-blue" data-value="2">2 dias antes</button>
+            <button type="button" class="choice-btn" data-value="7">1 semana antes</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p class="form-q">Que horas enviar o resumo diário?</p>
+          <select data-setting="horario"><option value="07:00">07:00</option><option value="08:00" selected>08:00</option><option value="09:00">09:00</option><option value="12:00">12:00</option></select>
+        </div>
+
+        <div class="form-group">
+          <p class="form-q">Nome da fábrica</p>
+          <input type="text" data-setting="fabrica" value="KAIROS Indústria">
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-primary" style="padding:13px 22px; font-size:14px;" onclick="saveSettings()">Salvar alterações</button>
+          <button class="btn-ghost" style="padding:13px 22px; font-size:14px;" onclick="resetSettings()">Restaurar padrão</button>
+        </div>
+      </div>
+
+      <div class="section-title">Sobre o sistema</div>
+      <div class="list-card">
+        <div class="list-row"><div class="row-main"><div class="row-title">Versão do KAIROS</div><div class="row-sub">Sistema de Manutenção Industrial</div></div><div class="row-date">1.0</div></div>
+        <div class="list-row"><span class="tag green">Em dia</span><div class="row-main"><div class="row-title">Cópia de segurança</div><div class="row-sub">Seus dados são salvos automaticamente</div></div><div class="row-date">Hoje, 03:00</div></div>
+      </div>
+    </div>
+
+    <div id="usuario" class="view">
+      <h1>Área do Usuário</h1>
+      <p class="sub">Seus dados e o que você fez no sistema</p>
+
+      <div class="status-card">
+        <div class="profile-hero">
+          <span class="avatar lg js-initials">OR</span>
+          <div class="row-main">
+            <div class="profile-hero-name js-name">Oscar Ribeiro</div>
+            <div class="item-loc">Gerente de Manutenção</div>
+            <div class="profile-tags"><span class="tag green">Ativo</span><span class="tag">Administrador</span></div>
+          </div>
+        </div>
+        <div class="profile-facts">
+          <div class="fact">E-mail<b class="js-email">oscar.ribeiro@kairos.com.br</b></div>
+          <div class="fact">Telefone<b class="js-phone">(11) 98000-0000</b></div>
+          <div class="fact">Setor<b>Manutenção Geral</b></div>
+          <div class="fact">Na equipe desde<b>Março de 2022</b></div>
+        </div>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-num">12</div>
+          <div class="metric-label">Ordens abertas por você</div>
+          <div class="metric-explain">Nos últimos 30 dias você abriu 12 ordens de serviço.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">Hoje, 07:42</div>
+          <div class="metric-label">Último acesso</div>
+          <div class="metric-explain">Se não foi você, troque sua senha abaixo.</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-num">Admin</div>
+          <div class="metric-label">Nível de acesso</div>
+          <div class="metric-explain">Você pode ver e alterar tudo no sistema.</div>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="form-card">
+          <div class="section-title" style="margin-bottom:18px;">Meus dados</div>
+          <div class="form-group"><p class="form-q">Nome completo</p><input type="text" id="perfil-nome" value="Oscar Ribeiro" autocomplete="name"></div>
+          <div class="form-group"><p class="form-q">E-mail</p><input type="email" id="perfil-email" value="oscar.ribeiro@kairos.com.br" autocomplete="email"></div>
+          <div class="form-group"><p class="form-q">Telefone</p><input type="tel" id="perfil-telefone" value="(11) 98000-0000" autocomplete="tel"></div>
+          <button class="btn-primary" style="padding:13px 22px; font-size:14px;" onclick="saveProfile()">Salvar meus dados</button>
+        </div>
+        <div class="form-card">
+          <div class="section-title" style="margin-bottom:18px;">Alterar senha</div>
+          <div class="form-group"><p class="form-q">Senha atual</p><input type="password" id="senha-atual" autocomplete="current-password"></div>
+          <div class="form-group"><p class="form-q">Nova senha</p><input type="password" id="senha-nova" placeholder="Mínimo de 6 caracteres" autocomplete="new-password"></div>
+          <div class="form-group"><p class="form-q">Repita a nova senha</p><input type="password" id="senha-repita" autocomplete="new-password"></div>
+          <button class="btn-ghost" style="padding:13px 22px; font-size:14px;" onclick="changePassword()">Alterar senha</button>
+        </div>
+      </div>
+
+      <div class="section-title">Sua atividade recente</div>
+      <div class="list-card" style="margin-bottom:22px;">
+        <div class="list-row"><span class="tag red">Corretiva</span><div class="row-main"><div class="row-title">Abriu ordem · Compressor CP-10</div><div class="row-sub">Setor Expedição</div></div><div class="row-date">Hoje, 07:50</div></div>
+        <div class="list-row"><span class="tag green">Preventiva</span><div class="row-main"><div class="row-title">Abriu ordem · Furadeira FI-30</div><div class="row-sub">Setor Montagem Final</div></div><div class="row-date">Hoje, 07:55</div></div>
+        <div class="list-row"><span class="tag">Relatório</span><div class="row-main"><div class="row-title">Consultou o relatório do mês</div><div class="row-sub">Desempenho da manutenção</div></div><div class="row-date">Ontem</div></div>
+        <div class="list-row"><span class="tag orange">Equipe</span><div class="row-main"><div class="row-title">Atualizou dados de Roberto Dias</div><div class="row-sub">Situação: em férias</div></div><div class="row-date">27/03</div></div>
+      </div>
+
+      <button class="btn-danger" onclick="signOut()">Sair da conta</button>
     </div>
 
   </div>
