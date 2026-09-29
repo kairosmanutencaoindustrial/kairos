@@ -628,3 +628,33 @@ html[data-theme="dark"] .attn-icon img{
     flex-basis:38px !important;
   }
 }
+
+/* =========================================================
+   CORREÇÕES — MENU LATERAL + ÍCONE MODO ESCURO
+   ========================================================= */
+
+/* Faz o menu lateral acompanhar toda a altura da página */
+@media (min-width:861px){
+  .sidebar{
+    height:auto !important;
+    min-height:100vh !important;
+    align-self:stretch !important;
+    overflow-y:visible !important;
+  }
+}
+
+/* Centraliza corretamente o ícone do modo escuro */
+.theme-icon{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+}
+
+.theme-icon img{
+  width:54px !important;
+  height:36px !important;
+  object-fit:contain !important;
+  display:block !important;
+  margin:0 !important;
+}
