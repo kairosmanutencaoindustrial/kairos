@@ -54,3 +54,20 @@
   /* Aluno: somente leitura nas telas do professor */
   body.role-aluno .com-add, body.role-aluno .com a{ display:none; }
   .ro-lock{ opacity:.65; } .ro-lock :disabled{ cursor:not-allowed; }
+
+/* Centraliza o desenho dos ícones (o PNG tem canvas maior que a caixa) */
+.theme-icon,
+.nav-key.nav-icon-wrap,
+.attn-icon{
+  position:relative;
+}
+
+.theme-icon img,
+.nav-icon,
+.attn-icon img{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
+}
