@@ -1,0 +1,56 @@
+/* ===== EXTRAS ===== */
+  body.role-aluno [data-r=prof]{ display:none!important; }
+  body.role-prof [data-r=aluno]{ display:none!important; }
+  .only-modo{ display:none; } body.modo-aluno .only-modo{ display:flex; }
+  .explain{ cursor:pointer; } .explain::after{ content:' 💡'; font-size:.75em; }
+  .ex-box{ margin:8px 0 18px; }
+  .side-ctl{ margin-top:14px; display:flex; flex-direction:column; gap:8px; font-size:12px; }
+  .side-ctl select{ padding:8px; font-size:12px; }
+  .side-ctl .btn-ghost{ padding:8px 10px; font-size:12px; }
+  .com{ border-top:1px solid var(--line); margin-top:12px; padding-top:10px; font-size:12.5px; }
+  .com-i{ margin-bottom:6px; } .com a{ color:var(--blue); cursor:pointer; font-weight:600; margin-left:6px; }
+  .com-add{ display:flex; gap:8px; margin-top:8px; } .com-add input{ padding:8px 10px; font-size:12.5px; }
+  .dots{ display:flex; gap:6px; margin:14px 0; } .dot{ width:9px; height:9px; border-radius:50%; background:var(--line); } .dot.on{ background:var(--blue); }
+  .tut-t{ font-size:18px; font-weight:800; margin-bottom:8px; } .tut-p{ font-size:14px; color:var(--muted); line-height:1.6; min-height:70px; }
+
+  /* Tema Aluno (azul e roxo) — funciona junto com o claro/escuro do site */
+  html[data-aluno="1"]{ --navy:#2A1B6E; --navy-active:#5B3FD1; --blue:#6C47FF; --accent:#8B6CFF; --orange:#F2670A; --green:#12A36B; --red:#E23B6B; }
+  html[data-aluno="1"][data-theme="light"]{ --page:#F4F0FF; --line:#E3DBFF; --blue-bg:#EEE9FF; --orange-bg:#FFEBDD; --green-bg:#DDF7EC; --red-bg:#FFE4EC; }
+  html[data-aluno="1"] .sidebar{ background:linear-gradient(180deg,#2A1B6E,#1A56A0); }
+  html[data-aluno="1"][data-theme="dark"] .sidebar{ background:linear-gradient(180deg,#150F33,#0D1F3F); }
+  html[data-aluno="1"] .nav-item.active{ background:linear-gradient(90deg,rgba(139,108,255,.35),rgba(139,108,255,.08)); }
+  html[data-aluno="1"] .seg-blue{ background:var(--blue); }
+  /* Atividades (estilo Teams) */
+  .form-card input[type=url], .form-card input[type=datetime-local], .form-card input[type=file], .form-card input[type=search]{ width:100%; padding:12px 14px; border-radius:8px; border:1px solid var(--line); font-family:inherit; font-size:13.5px; background:var(--card); color:var(--text); }
+  .form-card .search{ color:var(--text); }
+  .atv-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+  .code-badge{ font-size:11.5px; font-weight:800; letter-spacing:.06em; padding:6px 10px; border-radius:8px; background:var(--blue-bg); color:var(--blue); white-space:nowrap; }
+  .atv-desc{ font-size:13.5px; line-height:1.55; margin:12px 0; white-space:pre-wrap; }
+  .atv-chips{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+  .chip-f{ font-size:12px; font-weight:600; padding:5px 10px; border-radius:8px; border:1px solid var(--line); color:var(--muted); text-decoration:none; }
+  a.chip-f{ color:var(--blue); }
+  .atv-actions{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .atv-del{ color:var(--red)!important; }
+  .answer-form{ margin-top:6px; }
+
+  /* Tutorial */
+  .tut-step{ font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+  .form-card button:disabled{ opacity:.4; cursor:default; }
+  /* Barra de rolagem do menu lateral combinando com o site */
+  .sidebar{ scrollbar-width:thin; scrollbar-color:rgba(217,164,65,.4) transparent; }
+  .sidebar::-webkit-scrollbar{ width:8px; }
+  .sidebar::-webkit-scrollbar-track{ background:transparent; }
+  .sidebar::-webkit-scrollbar-thumb{ background:rgba(217,164,65,.35); border-radius:8px; border:2px solid transparent; background-clip:padding-box; }
+  .sidebar::-webkit-scrollbar-thumb:hover{ background:rgba(217,164,65,.6); background-clip:padding-box; }
+  html[data-aluno="1"] .sidebar{ scrollbar-color:rgba(139,108,255,.55) transparent; }
+  html[data-aluno="1"] .sidebar::-webkit-scrollbar-thumb{ background:rgba(139,108,255,.5); background-clip:padding-box; }
+  html[data-aluno="1"] .sidebar::-webkit-scrollbar-thumb:hover{ background:rgba(139,108,255,.8); background-clip:padding-box; }
+
+  /* Pop-up do tutorial */
+  #tut-pop{ position:fixed; inset:0; background:rgba(8,12,18,.6); display:flex; align-items:center; justify-content:center; z-index:1000; padding:20px; }
+  #tut-pop[hidden]{ display:none; }
+  .tut-card{ max-width:520px; width:100%; position:relative; margin:0; }
+  .tut-x{ position:absolute; top:12px; right:14px; background:none; border:none; color:var(--muted); font-size:16px; cursor:pointer; z-index:2; }
+  /* Aluno: somente leitura nas telas do professor */
+  body.role-aluno .com-add, body.role-aluno .com a{ display:none; }
+  .ro-lock{ opacity:.65; } .ro-lock :disabled{ cursor:not-allowed; }

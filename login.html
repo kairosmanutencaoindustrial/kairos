@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAIROS — Sistema de Manutenção Industrial</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("kairos-theme")==="dark"?"dark":"light"}catch(e){}</script>
+</head>
+<body style="display:flex;min-height:100vh;align-items:center;justify-content:center;padding:20px">
+<div class="form-card" style="width:100%;max-width:400px;margin:0">
+  <div style="background:var(--navy);border-radius:10px;padding:16px;margin-bottom:14px"><img src="assets/kairos-logo-white.png" alt="KAIROS" style="width:100%;max-width:200px;display:block;margin:auto"></div>
+  <p class="sub" style="margin-bottom:16px">KAIROS — Sistema de Manutenção Industrial</p>
+  <div class="choice-row" style="margin-bottom:16px">
+    <button type="button" class="choice-btn sel-blue" id="b-prof" onclick="pick('prof')">👨‍🏫 Professor</button>
+    <button type="button" class="choice-btn" id="b-aluno" onclick="pick('aluno')">🎓 Aluno</button>
+  </div>
+  <div class="choice-row" style="margin-bottom:16px">
+    <button type="button" class="choice-btn sel-blue" id="m-login" onclick="mode('login')">Entrar</button>
+    <button type="button" class="choice-btn" id="m-reg" onclick="mode('reg')">Cadastrar</button>
+  </div>
+  <div id="msg" role="alert" style="margin-bottom:12px;font-weight:600"></div>
+  <div class="form-group" id="g-nome" hidden><p class="form-q">Nome completo</p><input type="text" id="nome" autocomplete="name"></div>
+  <div class="form-group"><p class="form-q">E-mail</p><input type="email" id="email" autocomplete="username"></div>
+  <div class="form-group"><p class="form-q">Senha</p><input type="password" id="senha" autocomplete="current-password"></div>
+  <div class="form-group" id="g-codigo" hidden><p class="form-q">Código de professor</p><input type="password" id="codigo" autocomplete="off"></div>
+  <button type="button" class="btn-primary" id="go" style="width:100%" onclick="enviar()">Entrar</button>
+</div>
+<script>
+let role='prof', m='login';
+const $=id=>document.getElementById(id);
+const say=(t,ok)=>{$('msg').textContent=t||'';$('msg').style.color=ok?'#15803d':'#b91c1c'};
+function render(){
+  $('b-prof').className='choice-btn'+(role==='prof'?' sel-blue':'');
+  $('b-aluno').className='choice-btn'+(role==='aluno'?' sel-blue':'');
+  $('m-login').className='choice-btn'+(m==='login'?' sel-blue':'');
+  $('m-reg').className='choice-btn'+(m==='reg'?' sel-blue':'');
+  $('g-nome').hidden=m!=='reg';
+  $('g-codigo').hidden=!(m==='reg'&&role==='prof');
+  $('senha').autocomplete=m==='reg'?'new-password':'current-password';
+  $('senha').placeholder=m==='reg'?'mínimo 8 caracteres':'';
+  $('go').textContent=m==='reg'?'Criar conta de '+(role==='prof'?'professor':'aluno'):'Entrar';
+}
+function pick(r){role=r;say('');render()}
+function mode(x){m=x;say('');render()}
+/* ---- Versão GitHub Pages: contas guardadas no navegador (sem PHP/MySQL) ---- */
+const PROF_CODE='KAIROS-PROF';
+const hash=t=>{let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0;i<t.length;i++){const c=t.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return (4294967296*(2097151&h2)+(h1>>>0)).toString(36)};
+const contas=()=>{try{return JSON.parse(localStorage.getItem('k_contas'))||[]}catch(e){return[]}};
+const salvar=a=>localStorage.setItem('k_contas',JSON.stringify(a));
+(function seed(){
+  const a=contas();
+  [{id:1,nome:'Oscar Ribeiro',email:'oscar.ribeiro@kairos.com.br',senha:'Kairos@2026',perfil:'professor'},
+   {id:2,nome:'Aluno Demonstração',email:'aluno@kairos.com.br',senha:'Aluno@2026',perfil:'aluno'}]
+  .forEach(c=>{ if(!a.some(x=>x.email===c.email)) a.push({id:c.id,nome:c.nome,email:c.email,h:hash(c.senha),perfil:c.perfil}); });
+  salvar(a);
+})();
+function registrar(perfil,nome,email,senha,codigo){
+  email=email.toLowerCase();
+  if(!nome.trim()||!/^\S+@\S+\.\S+$/.test(email)||senha.length<8) throw Error('Informe nome, e-mail válido e senha com pelo menos 8 caracteres.');
+  if(perfil==='professor'&&codigo!==PROF_CODE) throw Error('Código de professor incorreto.');
+  const a=contas();
+  if(a.some(x=>x.email===email)) throw Error('Este e-mail já está cadastrado.');
+  a.push({id:Date.now(),nome:nome.trim(),email,h:hash(senha),perfil});
+  salvar(a);
+}
+function entrar(email,senha){
+  const c=contas().find(x=>x.email===email.toLowerCase()&&x.h===hash(senha));
+  if(!c) throw Error('E-mail ou senha incorretos.');
+  return c;
+}
+function enviar(){
+  try{
+    const email=$('email').value.trim(), senha=$('senha').value;
+    if(m==='reg'){
+      registrar(role==='prof'?'professor':'aluno',$('nome').value,email,senha,$('codigo').value);
+      m='login';render();$('senha').value='';$('codigo').value='';say('Conta criada! Agora entre com seu e-mail e senha.',true);return;
+    }
+    if(!email||!senha) return say('Informe e-mail e senha.');
+    const c=entrar(email,senha);
+    const isProf=c.perfil==='professor';
+    if((role==='prof')!==isProf) return say('Esta conta é de '+(isProf?'professor':'aluno')+'. Selecione o perfil correto acima.');
+    localStorage.setItem('k_user',JSON.stringify({role:isProf?'prof':'aluno',nome:c.nome,id:c.id,email:c.email}));
+    location.href='index.html';
+  }catch(e){say(e.message)}
+}
+['email','senha','codigo','nome'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter')enviar()}));
+render();
+</script>
+</body>
+</html>
