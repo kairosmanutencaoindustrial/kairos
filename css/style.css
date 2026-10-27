@@ -628,3 +628,25 @@ html[data-theme="dark"] .attn-icon img{
     flex-basis:38px !important;
   }
 }
+
+/* Sidebar fixa até o fim da página (somente desktop) */
+@media (min-width:861px){
+  .app{
+    overflow:visible;          /* anula o overflow:hidden que quebrava o sticky */
+  }
+
+  .sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    width:210px;
+    height:100vh;
+    height:100dvh;
+    overflow-y:auto;
+  }
+
+  .content{
+    margin-left:210px;         /* compensa a sidebar que saiu do fluxo */
+  }
+}
